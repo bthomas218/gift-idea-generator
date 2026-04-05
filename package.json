@@ -16,6 +16,6 @@
     "react-dom": "^19.2.4"
   },
   "scripts": {
-    "dev": "bun run src/index.tsx"
+    "dev": "bun run src/server.tsx"
   }
 }
