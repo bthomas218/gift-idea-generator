@@ -1,12 +1,15 @@
 import Home from "./pages/Home";
-import { Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 export default function App() {
   return (
     <>
       <div>
         <main>
-          <Home />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/results" element={<div>Results</div>} />
+          </Routes>
         </main>
       </div>
     </>
