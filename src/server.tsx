@@ -1,16 +1,21 @@
+import config from "./cfg";
+
+console.log(`Server running at http://${config.hostname}:${config.port}`);
+
 Bun.serve({
-  port: 3000,
+  port: config.port,
+  hostname: config.hostname,
 
   async fetch(req) {
     const url = new URL(req.url);
 
     if (url.pathname === "/") {
-      return new Response(Bun.file("./src/index.html"));
+      return new Response(Bun.file(`${__dirname}/app/index.html`));
     }
 
     if (url.pathname === "/client.js") {
       const result = await Bun.build({
-        entrypoints: ["./src/client.tsx"],
+        entrypoints: [`${__dirname}/app/client.tsx`],
         target: "browser",
         format: "esm",
       });
