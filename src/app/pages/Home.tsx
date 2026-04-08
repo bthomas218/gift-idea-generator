@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../css/Home.css";
 
 type InterestButton = {
   label: string;
@@ -111,6 +112,7 @@ export default function Home() {
                 <div className="d-flex flex-wrap gap-2">
                   {interests.map((interest, index) => (
                     <button
+                      type="button"
                       key={index}
                       className={`btn btn-outline-dark ${interest.active ? "active" : ""}`}
                       aria-pressed={interest.active}
@@ -123,6 +125,7 @@ export default function Home() {
               </div>
             </div>
             <button
+              type="button"
               className="btn btn-primary w-100 text-uppercase"
               onClick={() =>
                 console.log({
