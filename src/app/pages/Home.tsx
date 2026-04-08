@@ -1,4 +1,32 @@
+import { useState } from "react";
+
+type InterestButton = {
+  label: string;
+  active: boolean;
+};
+
 export default function Home() {
+  const [interests, setInterests] = useState<InterestButton[]>([
+    { label: "fashion", active: false },
+    { label: "jewelry", active: false },
+    { label: "tech", active: false },
+    { label: "outdoors", active: false },
+    { label: "home", active: false },
+    { label: "fitness", active: false },
+    { label: "gaming", active: false },
+  ]);
+  const [name, setName] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [budget, setBudget] = useState<number>(0);
+
+  const handleToggleInterest = (index: number) => {
+    setInterests((prevInterests) =>
+      prevInterests.map((interest, i) =>
+        i === index ? { ...interest, active: !interest.active } : interest,
+      ),
+    );
+  };
+
   return (
     <>
       <div
@@ -33,6 +61,8 @@ export default function Home() {
                   className="form-control"
                   placeholder="e.g. Sarah"
                   aria-label="First name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 ></input>
               </div>
               <div className="col">
@@ -47,6 +77,8 @@ export default function Home() {
                   className="form-control"
                   placeholder="e.g. 26"
                   aria-label="First name"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
                 ></input>
               </div>
             </div>
@@ -59,14 +91,50 @@ export default function Home() {
                   your budget
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
-                  placeholder="e.g. $50"
+                  placeholder="e.g. 50"
                   aria-label="First name"
+                  value={budget}
+                  onChange={(e) => setBudget(Number(e.target.value))}
                 ></input>
               </div>
             </div>
-            <button className="btn btn-primary w-100 text-uppercase">
+            <div className="mb-3 row">
+              <div className="col">
+                <label
+                  htmlFor="interests"
+                  className="form-label fs-6 text-uppercase text-secondary"
+                >
+                  their interests
+                </label>
+                <div className="d-flex flex-wrap gap-2">
+                  {interests.map((interest, index) => (
+                    <button
+                      key={index}
+                      className={`btn btn-outline-dark ${interest.active ? "active" : ""}`}
+                      aria-pressed={interest.active}
+                      onClick={() => handleToggleInterest(index)}
+                    >
+                      {interest.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn btn-primary w-100 text-uppercase"
+              onClick={() =>
+                console.log({
+                  name,
+                  age,
+                  budget,
+                  interests: interests
+                    .filter((i) => i.active)
+                    .map((i) => i.label),
+                })
+              }
+            >
               find gifts →
             </button>
           </div>
