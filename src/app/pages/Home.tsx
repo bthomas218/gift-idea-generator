@@ -31,6 +31,28 @@ export default function Home() {
     );
   };
 
+  const handleSubmit = () => {
+    const activeInterests = interests.filter((interest) => interest.active);
+    if (
+      name.trim() === "" ||
+      age.trim() === "" ||
+      budget <= 0 ||
+      activeInterests.length === 0
+    ) {
+      alert("Please fill out all fields and select at least one interest.");
+      return;
+    }
+
+    navigate("/results", {
+      state: {
+        name,
+        age,
+        budget,
+        interests: activeInterests.map((interest) => interest.label),
+      },
+    });
+  };
+
   return (
     <>
       <div
@@ -130,18 +152,7 @@ export default function Home() {
             <button
               type="button"
               className="btn btn-primary w-100 text-uppercase"
-              onClick={() =>
-                navigate("/results", {
-                  state: {
-                    name,
-                    age,
-                    budget,
-                    interests: interests
-                      .filter((interest) => interest.active)
-                      .map((interest) => interest.label),
-                  },
-                })
-              }
+              onClick={() => handleSubmit()}
             >
               find gifts →
             </button>
