@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
+import Results from "./pages/Results";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/results" element={<div>Results</div>} />
+            <Route path="/results" element={<Results />} />
           </Routes>
         </main>
       </div>

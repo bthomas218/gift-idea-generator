@@ -1,19 +1,4 @@
-type Props = {
-  id: number;
-  title: string;
-  slug: string;
-  price: number;
-  description: string;
-  category: Category;
-  images: string[];
-};
-
-type Category = {
-  id: number;
-  name: string;
-  image: string;
-  slug: string;
-};
+import { type Gift } from "../services/storeApi";
 
 export default function GiftCard({
   id,
@@ -22,10 +7,14 @@ export default function GiftCard({
   description,
   category,
   images,
-}: Props) {
+}: Gift) {
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <img src={images[0]} className="card-img-top" alt={title}></img>
+      <img
+        src={images[0] || "https://via.placeholder.com/300"}
+        className="card-img-top"
+        alt={title}
+      ></img>
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <h6 className="card-subtitle mb-2 text-muted">{category.name}</h6>

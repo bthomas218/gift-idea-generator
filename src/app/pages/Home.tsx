@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../css/Home.css";
-import GiftCard from "../components/GiftCard";
+import { useNavigate } from "react-router-dom";
 
 type InterestButton = {
   label: string;
@@ -20,6 +20,8 @@ export default function Home() {
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
   const [budget, setBudget] = useState<number>(0);
+
+  const navigate = useNavigate();
 
   const handleToggleInterest = (index: number) => {
     setInterests((prevInterests) =>
@@ -129,13 +131,15 @@ export default function Home() {
               type="button"
               className="btn btn-primary w-100 text-uppercase"
               onClick={() =>
-                console.log({
-                  name,
-                  age,
-                  budget,
-                  interests: interests
-                    .filter((i) => i.active)
-                    .map((i) => i.label),
+                navigate("/results", {
+                  state: {
+                    name,
+                    age,
+                    budget,
+                    interests: interests
+                      .filter((interest) => interest.active)
+                      .map((interest) => interest.label),
+                  },
                 })
               }
             >
@@ -144,21 +148,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <GiftCard
-        id={1}
-        title="Gift Card"
-        slug="gift-card"
-        price={50}
-        description="A gift card for any occasion."
-        category={{
-          id: 1,
-          name: "Gift Cards",
-          image: "/images/gift-card.jpg",
-          slug: "gift-cards",
-        }}
-        images={["/images/gift-card.jpg"]}
-      />
     </>
   );
 }
