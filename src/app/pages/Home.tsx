@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../css/Home.css";
+import GiftCard from "../components/GiftCard";
 
 type InterestButton = {
   label: string;
@@ -143,6 +144,21 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <GiftCard
+        id={1}
+        title="Gift Card"
+        slug="gift-card"
+        price={50}
+        description="A gift card for any occasion."
+        category={{
+          id: 1,
+          name: "Gift Cards",
+          image: "/images/gift-card.jpg",
+          slug: "gift-cards",
+        }}
+        images={["/images/gift-card.jpg"]}
+      />
     </>
   );
 }

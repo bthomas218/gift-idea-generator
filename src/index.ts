@@ -8,6 +8,8 @@ Bun.serve({
   routes: {
     "/*": index,
   },
+
+  development: config.environment === "dev",
 });
 
 console.log(`Server running at http://${config.hostname}:${config.port}`);
