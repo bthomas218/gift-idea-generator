@@ -11,6 +11,16 @@ type State = {
   interests: string[];
 };
 
+const interestToCategory: Record<string, string> = {
+  fashion: "clothes",
+  jewelry: "jewelery",
+  tech: "electronics",
+  fitness: "sports",
+  gaming: "electronics",
+  home: "home",
+  outdoors: "sports",
+};
+
 export default function Results() {
   const { state } = useLocation() as { state: State };
   const { name, age, budget, interests } = state;
@@ -23,8 +33,26 @@ export default function Results() {
     setLoading(true);
     const fetchGifts = async () => {
       try {
-        const giftData = await getGiftbyCategory("clothes");
-        setGifts(giftData);
+        const giftData = await Promise.all(
+          interests.map((interest) => {
+            const category = interestToCategory[interest];
+            if (!category) {
+              return Promise.resolve([]);
+            }
+            return getGiftbyCategory(category);
+          }),
+        );
+
+        setGifts(
+          Array.from(
+            new Map(
+              giftData
+                .flat()
+                .filter((gift) => gift.price <= budget)
+                .map((gift) => [gift.id, gift]),
+            ).values(),
+          ),
+        );
       } catch (err) {
         if (err instanceof Error) {
           setError(err);
