@@ -1,5 +1,6 @@
 import { type Gift } from "../types";
 import { useWishListContext } from "../context/WishListContext";
+import type React from "react";
 
 export default function GiftCard({
   id,
@@ -13,17 +14,22 @@ export default function GiftCard({
   const { addToWishList, isInWishList, removeFromWishList } =
     useWishListContext();
 
-  const handleAddToWishList = () => {
+  const handleAddToWishList = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     addToWishList({ id, title, slug, price, description, category, images });
   };
 
-  const handleRemoveFromWishList = () => {
+  console.log(images);
+
+  const handleRemoveFromWishList = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     removeFromWishList(id);
   };
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
-        src={images[0] || "https://via.placeholder.com/300"}
+        src={images[0] || "https://placehold.co/600x400"}
+        onError={(e) => (e.currentTarget.src = "https://placehold.co/600x400")}
         className="card-img-top"
         alt={title}
       ></img>

@@ -20,6 +20,10 @@ export const WishListProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("wishList", JSON.stringify(wishList));
+  }, [wishList]);
+
   const addToWishList = (gift: Gift) => {
     setWishList((prev) => [...prev, gift]);
   };
