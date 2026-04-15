@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { type Gift, getGiftbyCategory } from "../services/storeApi";
+import { getGiftbyCategory } from "../services/storeApi";
+import { type Gift } from "../types";
 import GiftCard from "../components/GiftCard";
 import "../css/Results.css";
 

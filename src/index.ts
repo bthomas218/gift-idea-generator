@@ -1,12 +1,11 @@
 import config from "./cfg";
-import index from "./app/index.html";
 
 Bun.serve({
   port: config.port,
   hostname: config.hostname,
 
   routes: {
-    "/*": index,
+    "/*": Bun.file("./app/index.html"),
   },
 
   development: config.environment === "dev",
