@@ -4,7 +4,7 @@ import { type Gift } from "../types";
 type IWishListContext = {
   wishList: Gift[];
   addToWishList: (gift: Gift) => void;
-  removeFromWishList: (gift: Gift) => void;
+  removeFromWishList: (id: number) => void;
   isInWishList: (id: number) => boolean;
 };
 
@@ -24,8 +24,8 @@ export const WishListProvider: React.FC<{ children: React.ReactNode }> = ({
     setWishList((prev) => [...prev, gift]);
   };
 
-  const removeFromWishList = (gift: Gift) => {
-    setWishList((prev) => prev.filter((g) => g.id !== gift.id));
+  const removeFromWishList = (id: number) => {
+    setWishList((prev) => prev.filter((gift) => gift.id !== id));
   };
 
   const isInWishList = (id: number) => {

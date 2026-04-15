@@ -1,13 +1,25 @@
-import { type Gift } from "../services/storeApi";
+import { type Gift } from "../types";
+import { useWishListContext } from "../context/WishListContext";
 
 export default function GiftCard({
   id,
   title,
+  slug,
   price,
   description,
   category,
   images,
 }: Gift) {
+  const { addToWishList, isInWishList, removeFromWishList } =
+    useWishListContext();
+
+  const handleAddToWishList = () => {
+    addToWishList({ id, title, slug, price, description, category, images });
+  };
+
+  const handleRemoveFromWishList = () => {
+    removeFromWishList(id);
+  };
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
@@ -22,7 +34,18 @@ export default function GiftCard({
         <p className="card-text">
           <strong>${price}</strong>
         </p>
-        <button className="btn btn-primary">Add to Wishlist</button>
+        {isInWishList(id) ? (
+          <button
+            className="btn btn-secondary"
+            onClick={handleRemoveFromWishList}
+          >
+            Remove From Wishlist
+          </button>
+        ) : (
+          <button className="btn btn-primary" onClick={handleAddToWishList}>
+            Add to Wishlist
+          </button>
+        )}
       </div>
     </div>
   );
