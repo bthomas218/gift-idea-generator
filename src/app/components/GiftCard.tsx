@@ -19,8 +19,6 @@ export default function GiftCard({
     addToWishList({ id, title, slug, price, description, category, images });
   };
 
-  console.log(images);
-
   const handleRemoveFromWishList = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     removeFromWishList(id);

@@ -4,6 +4,7 @@ import Results from "./pages/Results";
 import WishList from "./pages/WishList";
 import NavBar from "./components/NavBar";
 import { WishListProvider } from "./context/WishListContext";
+import "./css/App.css";
 
 export default function App() {
   return (

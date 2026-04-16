@@ -5,13 +5,16 @@ export default function WishList() {
   const { wishList } = useWishListContext();
   return (
     <>
-      <h1>Wish List</h1>
+      <h1 className="text-center">Wish List</h1>
       {wishList.length === 0 ? (
-        <p>Your wish list is empty.</p>
+        <p className="text-center">Your wish list is empty.</p>
       ) : (
         <div className="row">
           {wishList.map((gift) => (
-            <div className="col-md-4" key={gift.id}>
+            <div
+              className="d-flex flex-wrap gap-4 justify-content-center"
+              key={gift.id}
+            >
               <GiftCard {...gift} />
             </div>
           ))}

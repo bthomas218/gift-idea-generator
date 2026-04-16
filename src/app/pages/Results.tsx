@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { getGiftbyCategory } from "../services/storeApi";
 import { type Gift } from "../types";
 import GiftCard from "../components/GiftCard";
-import "../css/Results.css";
 
 type State = {
   name: string;
