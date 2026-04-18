@@ -31,7 +31,7 @@ Additional tools:
 - React Context (state management)
 - React Router (navigation)
 - Bootstrap (UI styling)
-- :contentReference[oaicite:0]{index=0} (product data)
+- Platzi FakestoreAPI
 
 ---
 
