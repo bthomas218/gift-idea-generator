@@ -1,5 +1,6 @@
 import { useWishListContext } from "../context/WishListContext";
 import GiftCard from "../components/GiftCard";
+import GiftGrid from "../components/GiftGrid";
 
 export default function WishList() {
   const { wishList } = useWishListContext();
@@ -9,16 +10,7 @@ export default function WishList() {
       {wishList.length === 0 ? (
         <p className="text-center">Your wish list is empty.</p>
       ) : (
-        <div className="row">
-          {wishList.map((gift) => (
-            <div
-              className="d-flex flex-wrap gap-4 justify-content-center"
-              key={gift.id}
-            >
-              <GiftCard {...gift} />
-            </div>
-          ))}
-        </div>
+        <GiftGrid gifts={wishList} />
       )}
     </>
   );

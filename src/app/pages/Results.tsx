@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getGiftbyCategory } from "../services/storeApi";
 import { type Gift } from "../types";
 import GiftCard from "../components/GiftCard";
+import GiftGrid from "../components/GiftGrid";
 
 type State = {
   name: string;
@@ -86,11 +87,7 @@ export default function Results() {
         <div>
           <h2 className="text-center">Gifts for {name}</h2>
           {gifts.length > 0 ? (
-            <div className="d-flex flex-wrap gap-4 justify-content-center">
-              {gifts.map((gift) => (
-                <GiftCard key={gift.id} {...gift} />
-              ))}
-            </div>
+            <GiftGrid gifts={gifts} />
           ) : (
             <p className="text-center">No gifts found.</p>
           )}
