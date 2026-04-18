@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../css/Home.css";
 import { useNavigate } from "react-router-dom";
+import { useWishListContext } from "../context/WishListContext";
 
 type InterestButton = {
   label: string;
@@ -8,6 +9,8 @@ type InterestButton = {
 };
 
 export default function Home() {
+  const { setCurrentRecipient } = useWishListContext();
+
   const [interests, setInterests] = useState<InterestButton[]>([
     { label: "fashion", active: false },
     { label: "jewelry", active: false },
@@ -42,6 +45,8 @@ export default function Home() {
       alert("Please fill out all fields and select at least one interest.");
       return;
     }
+
+    setCurrentRecipient(name);
 
     navigate("/results", {
       state: {

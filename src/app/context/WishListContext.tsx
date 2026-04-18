@@ -6,12 +6,15 @@ type IWishListContext = {
   addToWishList: (gift: Gift) => void;
   removeFromWishList: (id: number) => void;
   isInWishList: (id: number) => boolean;
+  currentRecipient: string | null;
+  setCurrentRecipient: (name: string | null) => void;
 };
 
 export const WishListProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [wishList, setWishList] = useState<Gift[]>([]);
+  const [currentRecipient, setCurrentRecipient] = useState<string | null>(null);
 
   useEffect(() => {
     const storedWishList = localStorage.getItem("wishList");
@@ -38,7 +41,14 @@ export const WishListProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <WishListContext.Provider
-      value={{ wishList, addToWishList, removeFromWishList, isInWishList }}
+      value={{
+        wishList,
+        addToWishList,
+        removeFromWishList,
+        isInWishList,
+        currentRecipient,
+        setCurrentRecipient,
+      }}
     >
       {children}
     </WishListContext.Provider>

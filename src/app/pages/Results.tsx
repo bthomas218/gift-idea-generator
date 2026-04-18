@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getGiftbyCategory } from "../services/storeApi";
 import { type Gift } from "../types";
-import GiftCard from "../components/GiftCard";
 import GiftGrid from "../components/GiftGrid";
+import { useWishListContext } from "../context/WishListContext";
 
 type State = {
   name: string;
@@ -25,12 +25,14 @@ const interestToCategory: Record<string, string> = {
 export default function Results() {
   const { state } = useLocation() as { state: State };
   const { name, age, budget, interests } = state;
+  const { setCurrentRecipient } = useWishListContext();
 
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setCurrentRecipient(name);
     setLoading(true);
     const fetchGifts = async () => {
       try {

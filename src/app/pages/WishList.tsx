@@ -1,14 +1,19 @@
 import { useWishListContext } from "../context/WishListContext";
-import GiftCard from "../components/GiftCard";
 import GiftGrid from "../components/GiftGrid";
 
 export default function WishList() {
-  const { wishList } = useWishListContext();
+  const { wishList, currentRecipient } = useWishListContext();
   return (
     <>
-      <h1 className="text-center">Wish List</h1>
+      <h1 className="text-center">
+        {currentRecipient ? `${currentRecipient}'s Wish List` : "Wish List"}
+      </h1>
       {wishList.length === 0 ? (
-        <p className="text-center">Your wish list is empty.</p>
+        <p className="text-center">
+          {currentRecipient
+            ? `Your wish list for ${currentRecipient} is empty.`
+            : "Your wish list is empty."}
+        </p>
       ) : (
         <GiftGrid gifts={wishList} />
       )}
